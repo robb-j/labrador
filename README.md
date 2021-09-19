@@ -19,6 +19,12 @@ I made this repo to play around with [alpine.js](https://alpinejs.dev/),
 [css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
 and [vite](https://vitejs.dev/).
 
+## Screenshots
+
+![Setup Interface](./screenshots/setup.png)
+
+![Editor Interface](./screenshots/editor.png)
+
 ## Development
 
 ### Setup
