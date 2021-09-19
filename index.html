@@ -22,7 +22,12 @@
         <section class="setupPage">
           <h1 class="setupPage-title">Setup</h1>
           <p class="setupPage-description">
-            First, use this form to setup your translation files.
+            First, use this form to setup your translation files. You will need
+            a
+            <strong>reference</strong>
+            and
+            <strong>target</strong>
+            file.
           </p>
           <div class="setupPage-referenceFile">
             <label for="referenceFile" class="setupPage-label">
@@ -34,7 +39,7 @@
               @change="referenceFile = $event.target.files[0]"
             />
             <p class="setupPage-helpText">
-              This is the file that base file that needs to be translated from.
+              This is the origin file that is going to be translated.
             </p>
           </div>
           <div class="setupPage-targetFile">
@@ -47,7 +52,8 @@
               @change="targetFile = $event.target.files[0]"
             />
             <p class="setupPage-helpText">
-              This is the file that translations are going into.
+              This is the file to put translations into. It can be an empty file
+              or have previous translations in it.
             </p>
           </div>
           <div class="setupPage-actions">
@@ -156,6 +162,8 @@
     <footer class="app-footer">
       Made by
       <a href="https://github.com/robb-j">@robb-j</a>
+      and
+      <a href="https://github.com/robb-j/labrador/">Open Source</a>
     </footer>
 
     <script type="module" src="/src/main.ts"></script>

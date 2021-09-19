@@ -1,13 +1,14 @@
 {
   "name": "@robb_j/labrador",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": "robb-j/labrador",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "prepare": "husky install",
-    "format": "prettier --write '**/*.{js,json,css,md,ts,tsx}'"
+    "format": "prettier --write '**/*.{js,json,css,md,ts,tsx}'",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
