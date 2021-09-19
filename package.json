@@ -1,0 +1,44 @@
+{
+  "name": "@robb_j/labrador",
+  "version": "0.0.0",
+  "repository": "robb-j/labrador",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "prepare": "husky install",
+    "format": "prettier --write '**/*.{js,json,css,md,ts,tsx}'"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/yaml": "^1.9.7",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1",
+    "standard-version": "^9.3.1",
+    "typescript": "^4.3.2",
+    "vite": "^2.5.4"
+  },
+  "dependencies": {
+    "@alpinejs/persist": "^3.3.5",
+    "alpinejs": "^3.3.5",
+    "dot-prop": "^6.0.1",
+    "yaml": "^1.10.2"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,ts,tsx}": [
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "htmlWhitespaceSensitivity": "ignore"
+  }
+}

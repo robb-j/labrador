@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labrador i18n</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="app">
+    <header class="app-header">Labrador i18n</header>
+    <main class="app-main" x-data="changes">
+      <!--
+        SETUP PAGE
+      -->
+      <template x-if="state == 'setup'">
+        <section class="setupPage">
+          <h1 class="setupPage-title">Setup</h1>
+          <p class="setupPage-description">
+            First, use this form to setup your translation files.
+          </p>
+          <div class="setupPage-referenceFile">
+            <label for="referenceFile" class="setupPage-label">
+              1. Select reference file
+            </label>
+            <input
+              type="file"
+              name="refFile"
+              @change="referenceFile = $event.target.files[0]"
+            />
+            <p class="setupPage-helpText">
+              This is the file that base file that needs to be translated from.
+            </p>
+          </div>
+          <div class="setupPage-targetFile">
+            <label for="targetFile" class="setupPage-label">
+              2. Select target file
+            </label>
+            <input
+              type="file"
+              name="targetFile"
+              @change="targetFile = $event.target.files[0]"
+            />
+            <p class="setupPage-helpText">
+              This is the file that translations are going into.
+            </p>
+          </div>
+          <div class="setupPage-actions">
+            <button
+              class="setupPage-nextButton"
+              :disabled="!canSubmitFiles"
+              @click="startChanges(referenceFile, targetFile)"
+            >
+              Next
+            </button>
+          </div>
+        </section>
+      </template>
+
+      <!--
+        TRANSLATE
+      -->
+      <template x-if="state == 'editing'">
+        <section class="translatePage" x-data="changes">
+          <h1 class="translatePage-title">Translating</h1>
+          <div class="translatePage-topActions">
+            <button
+              class="translatePage-toolButton"
+              @click="cycleViewMode()"
+              x-text="'Showing: ' + viewMode"
+            ></button>
+            <button class="translatePage-toolButton" @click="open = {}">
+              Collapse all
+            </button>
+          </div>
+          <div class="translatePage-edits">
+            <template x-if="filteredEdits.length === 0">
+              <p class="translatePage-empty">Nothing to show</p>
+            </template>
+            <template x-for="edit in filteredEdits">
+              <div class="edit" :class="open[edit.key] ? 'is-open' : ''">
+                <div class="edit-heading">
+                  <span
+                    class="edit-disclosure"
+                    x-text="open[edit.key] ? '▼' : '▶'"
+                  ></span>
+                  <p
+                    class="edit-key"
+                    x-text="edit.key"
+                    @click="open[edit.key] = !open[edit.key]"
+                  ></p>
+                  <template x-if="!edit.target && !changes[edit.key]">
+                    <span class="edit-tag is-pink">missing</span>
+                  </template>
+                  <template x-if="changes[edit.key]">
+                    <span class="edit-tag">changed</span>
+                  </template>
+                  <button
+                    class="edit-copyKey"
+                    x-data="copy"
+                    @click="copy(edit.key)"
+                    x-text="copied ? 'Copied' : 'Copy Key'"
+                  ></button>
+                </div>
+                <template x-if="open[edit.key]">
+                  <div class="edit-editor">
+                    <div class="field">
+                      <label>
+                        Reference
+                        <textarea
+                          type="text"
+                          disabled
+                          rows="4"
+                          :value="getReferenceValue(edit.key)"
+                        ></textarea>
+                      </label>
+                    </div>
+                    <div class="field">
+                      <label>
+                        Target
+                        <textarea
+                          type="text"
+                          :value="changes[edit.key] || getTargetValue(edit.key)"
+                          @input="makeEdit(edit.key, $event)"
+                          rows="4"
+                        ></textarea>
+                      </label>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+          <div class="translatePage-bottomActions">
+            <button
+              class="translatePage-saveButton"
+              @click="saveChanges()"
+              :disabled="!hasChanges"
+            >
+              Save
+            </button>
+            <button class="translatePage-resetButton" @click="resetChanges()">
+              Restart
+            </button>
+            <p x-text="changesMessage"></p>
+          </div>
+        </section>
+      </template>
+    </main>
+
+    <footer class="app-footer">
+      Made by
+      <a href="https://github.com/robb-j">@robb-j</a>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

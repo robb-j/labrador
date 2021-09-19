@@ -1,0 +1,292 @@
+/*
+  Base
+*/
+:root {
+  /* started with https://coolors.co/3d3b8e-6883ba-f9f9f9-e072a4-b0e298 */
+  --dark-blue: #3d3b8e;
+  --light-blue: #35a7ff;
+  --white: #f9f9f9;
+  --pink: #e072a4;
+  --green: #6bf178;
+  --yellow: #ffe74c;
+  --red: #d7263d;
+
+  --black: #001100;
+  --background: white;
+
+  /* https://type-scale.com/ */
+  --size-1: 3.052rem;
+  --size-2: 2.441rem;
+  --size-3: 1.953rem;
+  --size-4: 1.563rem;
+  --size-5: 1.25rem;
+  --size-6: 1rem;
+  --size-7: 0.8rem;
+  --size-8: 0.64rem;
+  --size-9: 0.512rem;
+
+  --grey-1: hsl(0, 0%, 20%);
+  --grey-2: hsl(0, 0%, 30%);
+  --grey-3: hsl(0, 0%, 40%);
+  --grey-4: hsl(0, 0%, 50%);
+  --grey-5: hsl(0, 0%, 60%);
+
+  --gap: 0.75rem;
+
+  --body: 'Rubik', sans-serif;
+  --system: system-ui, sans-serif;
+  --monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+    Liberation Mono, monospace;
+}
+
+/*
+  Reset
+*/
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+button,
+input,
+select {
+  margin: 0;
+}
+body {
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 16px;
+  background: var(--background);
+}
+button {
+  padding: 0.3em 0.7em;
+  font-size: var(--size-5);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: var(--light-blue);
+  color: var(--white);
+  box-shadow: 3px 3px 10px var(--green);
+  cursor: pointer;
+  border-radius: 2px;
+}
+button:disabled {
+  background: var(--white);
+  color: var(--black);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+a {
+  color: var(--dark-blue);
+}
+[x-cloak] {
+  display: none !important;
+}
+
+/*
+  App
+*/
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-header {
+  padding: 0.5rem var(--gap);
+  font-size: 1.25rem;
+  font-family: var(--monospace);
+  font-weight: bold;
+  background: var(--pink);
+  color: var(--white);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+.app-main {
+  flex: 1;
+  padding: 0rem var(--gap);
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.app-footer {
+  font-family: var(--monospace);
+  text-align: center;
+  padding: 4em 2em 1em;
+}
+
+/* 
+  Setup page
+*/
+.setupPage {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  margin: 2em 0;
+  gap: 0 var(--gap);
+}
+.setupPage-title {
+  grid-column: 1 / 3;
+  font-size: var(--size-1);
+  margin: 0;
+  line-height: 1;
+}
+.setupPage-description {
+  grid-column: 1 / 3;
+  font-size: var(--size-5);
+  color: var(--grey-1);
+  margin: 0 0 2rem;
+}
+.setupPage-referenceFile,
+.setupPage-targetFile {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 2.5rem;
+}
+.setupPage-label {
+  font-weight: bold;
+  font-family: var(--system);
+  font-size: var(--size-5);
+}
+.setupPage-helpText {
+  font-weight: 400;
+  font-size: var(--size-7);
+  margin: 0.6rem 0 0;
+  color: var(--grey-3);
+}
+.setupPage-actions {
+  grid-column: 1 / 3;
+
+  display: flex;
+  gap: var(--gap);
+}
+
+/*
+  Translate page
+*/
+.translatePage {
+  position: relative;
+}
+.translatePage-topActions,
+.translatePage-bottomActions {
+  position: sticky;
+  background: var(--background);
+  padding: var(--gap) 0;
+  display: flex;
+  gap: var(--gap);
+  z-index: 1;
+}
+.translatePage-topActions {
+  top: 0;
+  border-bottom: 2px solid var(--dark-blue);
+}
+.translatePage-bottomActions {
+  bottom: 0;
+  border-top: 2px solid var(--dark-blue);
+}
+.translatePage-toolButton {
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 1px 1px 5px var(--green);
+}
+.translatePage-resetButton {
+  background: var(--red);
+  color: var(--white);
+}
+.translatePage-saveButton {
+  background: var(--green);
+  color: var(--black);
+}
+.translatePage-edits {
+}
+.translatePage-empty {
+  margin: 7rem 0;
+  font-size: 1.3em;
+  color: var(--grey-4);
+  text-align: center;
+}
+
+/*
+  Edit
+*/
+.edit {
+  padding: 0.5em;
+  position: relative;
+}
+.edit:not(:last-child) {
+  border-bottom: 1px dashed var(--light-blue);
+}
+.edit-heading {
+  display: flex;
+  gap: var(--gap);
+}
+.edit-disclosure {
+  font-family: var(--monospace);
+}
+.edit-key {
+  font-family: var(--monospace);
+  margin: 0;
+  cursor: pointer;
+  flex: 1;
+}
+.edit-key:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--light-blue);
+}
+.edit-copyKey {
+  font-size: var(--size-7);
+  background: var(--white);
+  color: var(--black);
+  box-shadow: none;
+}
+.edit-editor {
+  display: flex;
+  gap: var(--gap);
+  justify-content: stretch;
+  padding: var(--gap) 0;
+}
+.edit-tag {
+  background: var(--grey-5);
+  color: var(--white);
+  border-radius: 999em;
+  padding: 0.25em 0.5em;
+  line-height: 1;
+  align-self: center;
+}
+.edit-tag.is-pink {
+  background: var(--pink);
+  color: var(--white);
+}
+
+/*
+  Field
+*/
+.field {
+  flex: 1;
+}
+.field label {
+  font-weight: bold;
+}
+.field textarea {
+  display: block;
+  width: 100%;
+  font-size: var(--size-6);
+  resize: vertical;
+
+  border: 1px solid var(--dark-blue);
+  background-color: var(--white);
+  border-radius: 4px;
+  font-family: var(--body);
+  color: var(--black);
+}
+.field textarea:disabled {
+  color: var(--grey-2);
+  border-color: var(--grey-5);
+  cursor: not-allowed;
+}
